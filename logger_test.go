@@ -42,3 +42,20 @@ func TestLogSetLevel(t *testing.T) {
 	log.Warn("Warn level")
 	log.Error("Error level")
 }
+
+func TestLogOutputFile(t *testing.T) {
+	// It creates a new instance of the logger.
+	log := logrus.New()
+
+	// Creating a file called app.log and writing to it.
+	file, _ := os.OpenFile("app.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+
+	// Setting the output of the log to the file.
+	log.SetOutput(file)
+
+	// Printing the message to the console.
+	log.Info("Info Logger")
+	log.Warn("Warn Logger")
+	log.Error("Error Logger")
+
+}
