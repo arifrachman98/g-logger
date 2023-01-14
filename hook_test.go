@@ -23,3 +23,17 @@ func (s *SampleHook) Fire(entry *logrus.Entry) error {
 	return nil
 }
 
+// logger, and then logs a message
+func TestLogHook(t *testing.T) {
+	// Creating a new instance of the logrus logger.
+	log := logrus.New()
+	// Adding a hook to the logger.
+	log.AddHook(&SampleHook{})
+
+	// Logging the message to the console.
+	log.Info("Log info")
+	log.Warn("Log warn")
+	log.Error("Log Warn")
+	log.Debug("Log Warn")
+
+}
