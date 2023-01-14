@@ -29,3 +29,16 @@ func TestLogLevel(t *testing.T) {
 	log.Warn("This is warn logger")
 	log.Error("This is error logger")
 }
+
+func TestLogSetLevel(t *testing.T) {
+	// Setting the log level to trace level.
+	log := logrus.New()
+	log.SetLevel(logrus.TraceLevel)
+
+	// Printing the message to the console.
+	log.Trace("Trace level")
+	log.Debug("Debug level")
+	log.Info("Info level")
+	log.Warn("Warn level")
+	log.Error("Error level")
+}
