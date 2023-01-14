@@ -74,3 +74,25 @@ func TestLogOutputJSONFormatter(t *testing.T) {
 	log.Warn("Log warn is here")
 	log.Error("Log error was here")
 }
+
+func TestLogOutputJSONxFile(t *testing.T) {
+	// It creates a new instance of the logger.
+	log := logrus.New()
+
+	// Creating a file called dir.log and writing to it.
+	file, _ := os.OpenFile("dir.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+
+	// Setting the formatter to JSON.
+	log.SetFormatter(&logrus.JSONFormatter{
+		PrettyPrint: true,
+	})
+	// Setting the output of the log to the file.
+	log.SetOutput(file)
+
+	// Printing the message to the console.
+	log.Trace("Trace level good")
+	log.Debug("Debug level bad enough")
+	log.Info("Info level was clear")
+	log.Warn("Warn level negative")
+	log.Error("Error level secure")
+}
