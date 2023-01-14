@@ -59,3 +59,18 @@ func TestLogOutputFile(t *testing.T) {
 	log.Error("Error Logger")
 
 }
+
+func TestLogOutputJSONFormatter(t *testing.T) {
+	// It creates a new instance of the logger.
+	log := logrus.New()
+
+	// Setting the formatter to JSON.
+	log.SetFormatter(&logrus.JSONFormatter{
+		PrettyPrint: true,
+	})
+
+	// Printing the message to the console.
+	log.Info("Log info over here")
+	log.Warn("Log warn is here")
+	log.Error("Log error was here")
+}
