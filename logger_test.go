@@ -96,3 +96,24 @@ func TestLogOutputJSONxFile(t *testing.T) {
 	log.Warn("Warn level negative")
 	log.Error("Error level secure")
 }
+
+func TestLogWithField(t *testing.T) {
+	// It creates a new instance of the logger.
+	log := logrus.New()
+
+	// Creating a file called dir.log and writing to it.
+	file, _ := os.OpenFile("user.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+
+	// Setting the formatter to JSON.
+	log.SetFormatter(&logrus.JSONFormatter{
+		PrettyPrint: true,
+	})
+	// Setting the output of the log to the file.
+	log.SetOutput(file)
+
+	// Adding a field to the log.
+	log.WithField("username", "jokokendic").Info("Joko was here")
+	log.WithField("name", "Jaka").
+		WithField("username", "jaakee").
+		Info("Jaka the other side")
+}
