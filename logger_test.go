@@ -117,3 +117,34 @@ func TestLogWithField(t *testing.T) {
 		WithField("username", "jaakee").
 		Info("Jaka the other side")
 }
+
+func TestLogWithFields(t *testing.T) {
+	// It creates a new instance of the logger.
+	log := logrus.New()
+
+	// Creating a file called dir.log and writing to it.
+	file, _ := os.OpenFile("address.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+
+	// Setting the formatter to JSON.
+	log.SetFormatter(&logrus.JSONFormatter{
+		PrettyPrint: true,
+	})
+	// Setting the output of the log to the file.
+	log.SetOutput(file)
+
+	// Adding a field to the log.
+	log.WithFields(logrus.Fields{
+		"Address": "Phenompend",
+		"City":    "Logero",
+	}).Info("address user 1")
+
+	log.WithFields(logrus.Fields{
+		"Address": "Kindape X",
+		"City":    "Koraemo",
+	}).Info("address user 2")
+
+	log.WithFields(logrus.Fields{
+		"Address": "Lomera",
+		"City":    "Jigeso",
+	}).Info("address user 3")
+}
