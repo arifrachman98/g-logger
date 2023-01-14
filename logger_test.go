@@ -148,3 +148,49 @@ func TestLogWithFields(t *testing.T) {
 		"City":    "Jigeso",
 	}).Info("address user 3")
 }
+
+func TestLogEntry(t *testing.T) {
+	// It creates a new instance of the logger.
+	log := logrus.New()
+
+	// Creating a file called dir.log and writing to it.
+	file, _ := os.OpenFile("bid.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+
+	// Setting the formatter to JSON.
+	log.SetFormatter(&logrus.JSONFormatter{
+		PrettyPrint: true,
+	})
+	// Setting the output of the log to the file.
+	log.SetOutput(file)
+
+	// A for loop that is looping 100 times.
+	for i := 1; i <= 100; i++ {
+		// Creating a new entry for the log.
+		entry := logrus.NewEntry(log)
+		// Checking if the number is even.
+		if i%2 == 0 {
+			entry.WithFields(logrus.Fields{
+				"name": "Joko",
+				"bid":  i,
+			}).Info("Rejected")
+			// Checking if the number is divisible by 3.
+		} else if i%3 == 0 {
+			entry.WithFields(logrus.Fields{
+				"name": "Joko",
+				"bid":  i,
+			}).Info("Deny")
+			// Checking if the number is divisible by 5.
+		} else if i%5 == 0 {
+			entry.WithFields(logrus.Fields{
+				"name": "Joko",
+				"bid":  i,
+			}).Info("OUT")
+			// The else statement.
+		} else {
+			entry.WithFields(logrus.Fields{
+				"name": "Joko",
+				"bid":  i,
+			}).Info("Accept")
+		}
+	}
+}
