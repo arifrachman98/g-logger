@@ -17,3 +17,15 @@ func TestLog(t *testing.T) {
 	logger.Println("Hello logger sirupsen")
 	fmt.Println("Hello logger Go-Lang")
 }
+
+func TestLogLevel(t *testing.T) {
+	// It creates a new instance of the logger.
+	log := logrus.New()
+
+	// A log level.
+	log.Trace("This is trace logger")
+	log.Debug("This is debug logger")
+	log.Info("This is info logger")
+	log.Warn("This is warn logger")
+	log.Error("This is error logger")
+}
